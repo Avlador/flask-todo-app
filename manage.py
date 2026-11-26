@@ -4,7 +4,14 @@ from application import create_app
 from application.extensions import db
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
+import collections
+import collections.abc
 
+
+for attr in ('Mapping', 'MutableMapping', 'Iterable', 'Iterator', 'Sequence', 'MutableSequence', 'Set', 'MutableSet', 'Callable'):
+    if not hasattr(collections, attr):
+        setattr(collections, attr, getattr(collections.abc, attr))
+        
 app = create_app('default')
 
 manager = Manager(app)
@@ -15,3 +22,4 @@ manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
     manager.run()
+

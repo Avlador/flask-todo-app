@@ -3,5 +3,4 @@
 *.py[cod]
 *pycache*
 *cache*
-.venv
-.migration
+venv/
